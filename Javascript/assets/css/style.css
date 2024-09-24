@@ -1,0 +1,24 @@
+.slider-img-wrapper{
+    height:100em;
+}
+
+
+.aboutus-img-wrapper-sm{
+    height: 5rem;
+}
+
+.faqs-title{
+    font-size: 4em;
+}
+
+.logo-img-wrapper{
+    width: 5rem;
+}
+
+.hide {
+    display: none;
+}
+
+.footer-container {
+    height: 3rem;
+}

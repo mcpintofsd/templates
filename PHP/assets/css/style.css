@@ -1,0 +1,17 @@
+.img-size{
+    width: 100px;
+}
+
+.title-background{
+    background-color:rgba(0, 0, 0, 0.979);
+    color: white;
+    border-radius: 6px;
+}
+
+.hide {
+    display: none;
+}
+
+.img-thumbnail{
+    width: 10rem;
+}

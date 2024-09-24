@@ -1,0 +1,28 @@
+.bodyContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.displayAreaContainer{
+    display: flex;
+    width: 80%;
+    border: 1px solid black;
+    background-color: rgba(252, 235, 203, 0.527);
+    justify-content: center;
+}
+
+.title-background{
+    background-color:rgba(0, 0, 61, 0.979);
+    color: white;
+    border-radius: 6px;
+}
+
+.hide {
+    display: none;
+}
+
+.alertWrapper{
+    display: flex;
+    width: 100%;
+    height: 50%;
+}

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste 2024</title>
+
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/dataTables.js"></script>
+    <script src="assets/js/client.js"></script>
+    <script src="assets/js/wine.js"></script>
+    <script src="assets/js/producer.js"></script>
+    <script src="assets/js/sale.js"></script>
+    <script src="assets/js/local.js"></script>
+    <script src="assets/js/sweetalert2.js"></script>
+    <script src="assets/js/select2.js"></script>
+    <script src="assets/js/function_wine.js"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/dataTables.css">
+    <link rel="stylesheet" href="assets/css/select2.css">
+</head>
+<body>
+    <!-- Body Container -->
+    <div class="container-fluid">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary mx-2">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="assets/img/logo.png" alt="Logo" width="40" height="30">
+                </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="aboutus.html">Sobre Nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Vinhos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="producer.html">Produtor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="client.html">Cliente</a>
+                    </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <button type="button" class="btn btn-light">Procurar</button>
+                        <input class="form-control mx-2 bg-dark text-light" type="search" placeholder="Tinto, branco, etc..." aria-label="Search">
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Registration Form -->
+        <div id="wineRegistrationForm" class="container mt-5">
+            <h3 class="fw-bold">Registar Vinho</h3>
+            <form class="row g-3 needs-validation" novalidate>
+                <div class="col-md-6">
+                    <label for="nameWine" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nameWine"required>
+                </div>
+                <div class="col-md-6">
+                    <label for="producerWineSelect" class="form-label">Produtor</label>
+                    <select class="form-select" id="producerWineSelect" required>
+                        <option value="-1">Sem produtores registados</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="priceWine" class="form-label">Preço</label>
+                    <input type="number" class="form-control" id="priceWine" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="yearWine" class="form-label">Ano</label>
+                    <input type="number" class="form-control" id="yearWine" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="stockQuantWine" class="form-label">Quantidade em stock</label>
+                    <input type="number" class="form-control" id="stockQuantWine" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="varietyWine" class="form-label">Castas</label>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Descrição</th>
+                              <th scope="col">Adicionar</th>
+                            </tr>
+                          </thead>
+                          <tbody id="varietyWineTableBody">
+                          </tbody>
+                    </table>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="button" onclick="registerWine()">Registar</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="saleRegistrationForm" class="container mt-5">
+            <h3 class="fw-bold">Registar Venda</h3>
+            <form class="row g-3 needs-validation" novalidate>
+                <div class="col-md-6">
+                    <label for="idSale" class="form-label">Número de Venda</label>
+                    <input type="number" class="form-control" id="idSale" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="clientSaleSelect" class="form-label">Cliente</label>
+                    <select class="form-select" id="clientSaleSelect" required>
+                        <option value="-1">Sem clientes registados</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="dateSale" class="form-label">Data de Venda</label>
+                    <input type="date" class="form-control" id="dateSale" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="wineListSale" class="form-label">Vinhos</label>
+                    <table class="table table-striped" id="wineListSaleTable">
+                        <thead>
+                            <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Nome</th>
+                              <th scope="col">Produtor</th>
+                              <th scope="col">Adicionar</th>
+                              <th scope="col">Quantidade</th>
+                            </tr>
+                          </thead>
+                          <tbody id="wineListSaleTableBody">
+                          </tbody>
+                    </table>
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="button" onclick="registerSale()">Registar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Table Listing with Filter -->
+        <div id="saleList" class="container mt-5">
+            <h3 class="fw-bold">Lista de Vendas</h3>
+            <label for="clientSelectFilter">Filtrar por Cliente</label>
+            <select class="form-select" id="clientSelectFilter" required>
+                <option value="-1">Sem clientes registados</option>
+            </select>
+            <table class="table table-striped" id="saleListTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Número de Venda</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">Nome do Cliente</th>
+                        <th scope="col">Informação de Cliente</th>
+                        <th scope="col">Vinhos Vendidos</th>
+                    </tr>
+                </thead>
+                <tbody id="saleListTableBody">
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="wineStockList" class="container mt-5">
+            <h3 class="fw-bold">Lista de Vinhos</h3>
+            <label for="stockStatusSelectFilter">Filtrar por Estado</label>
+            <select class="form-select" id="stockStatusSelectFilter" required>
+                <option value ='-1'>Ver todos</option>
+                <option value ='Em stock'>Em stock</option>
+                <option value ='Esgotado'>Esgotado</option>
+            </select>
+            <table class="table table-striped" id="wineStockListTable">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Produtor</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Estado de Stock</th>
+                        <th scope="col">Quantidade a Adicionar</th>
+                        <th scope="col">Adicionar Stock</th>
+                    </tr>
+                </thead>
+                <tbody id="wineStockListTableBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Info Editing Modal -->
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog" id="clientInfoModal">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Informação de Cliente<span class="hide" id="selectedClientKey"></span></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3 needs-validation" novalidate>
+                        <div class="col-md-6">
+                            <label for="nameClientInfo" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nameClientInfo" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="addressClientInfo" class="form-label">Morada</label>
+                            <input type="text" class="form-control" id="addressClientInfo" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="idClientInfo" class="form-label">NIF</label>
+                            <input type="number" class="form-control" id="idClientInfo" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="phoneClientInfo" class="form-label">Telemóvel</label>
+                            <input type="phone" class="form-control" id="phoneClientInfo" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="emailClientInfo" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="emailClientInfo" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="typeClientInfo" class="form-label">Tipo</label>
+                            <select class="form-select" id="typeClientInfo" required>
+                                <option value="-1">Escolha uma opção</option>
+                                <option value="Particular">Particular</option>
+                                <option value="Particular">Empresarial</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="button" onclick="editClient()">Registar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!-- Listing Info with Table Modal -->
+        <div class="modal" tabindex="-1">
+            <div class="modal-dialog" id="saleWineInfoModal">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Vinhos Vendidos</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped" id="saleWineInfoTable">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Produtor</th>
+                                <th scope="col">Preço</th>
+                                <th scope="col">Ano</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">Estado de Stock</th>
+                                <th scope="col">Castas</th>
+                                <th scope="col">Quantidade Selecionada</th>
+                            </tr>
+                        </thead>
+                        <tbody id="saleWineInfoTableBody">
+                        </tbody>
+                    </table>
+                    <br>
+                    <p>Valor total para a venda: <span id='totalSalePrice'></span> €</p>
+                    <br>
+                    <div class="hide" id="varietyInfoContainer">
+                        <table class="table table-striped" id="varietyInfoTable">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Descrição</th>
+                                </tr>
+                            </thead>
+                            <tbody id="varietyInfoTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+              </div>
+            </div>
+        </div>
+</body>
+</html>
